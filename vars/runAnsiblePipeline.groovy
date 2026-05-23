@@ -10,7 +10,7 @@ def call(Map config = [:]) {
     def skipApproval = congig.path('KEEP_APPROVAL_STAGE', true).toString().toBoolean() == false
     
     pipeline {
-        agent any 
+        agent assign-6
 
         options {
             ansiColor('xterm') 
