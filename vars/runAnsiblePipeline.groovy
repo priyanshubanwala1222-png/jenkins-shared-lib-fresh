@@ -5,9 +5,9 @@ def call(Map config = [:]) {
     def environment = config.get('ENVIRONMENT', 'prod')
     def repoURL = config.get('REPO_UR', 'https://github.com/priyanshubanwala1222-png/Batch.34.2026.git')
     def branch = config.get('BRANCH', 'main')
-    def basePath = config.path('CODE_BASE_PATH', "env/${environment}")
-    def actionMessage = config.path('ACTION_MESSAGE', "Deploying Nginx to ${environment}")
-    def skipApproval = congig.path('KEEP_APPROVAL_STAGE', true).toString().toBoolean() == false
+    def basePath = config.get('CODE_BASE_PATH', "env/${environment}")
+    def actionMessage = config.get('ACTION_MESSAGE', "Deploying Nginx to ${environment}")
+    def skipApproval = congig.get('KEEP_APPROVAL_STAGE', true).toString().toBoolean() == false
     
     pipeline {
         agent {label 'assign-6'}
