@@ -40,7 +40,7 @@ def call(Map config = [:]) {
                 steps {
                     echo "Executing Ansible Playbook"
                     dir(basePath) {                                     // cd into nginx-role/
-                        sh "ansible-playbook -i inventories/hosts site.yml"
+                        sh "ansible-playbook -i inventories/hosts.ini site.yml"
                     }
                 }
             }
