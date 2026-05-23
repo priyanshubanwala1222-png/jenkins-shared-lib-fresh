@@ -10,7 +10,7 @@ def call(Map config = [:]) {
     def skipApproval = congig.path('KEEP_APPROVAL_STAGE', true).toString().toBoolean() == false
     
     pipeline {
-        agent assign-6
+        agent {label 'assign-6'}
 
         options {
             ansiColor('xterm') 
@@ -23,8 +23,8 @@ def call(Map config = [:]) {
                     echo "Cloning Ansible configuration from ${repoUrl} [${branch}]..."
                     cleanWs()
                     checkout([$class: 'GitSCM',
-                        braches :[[name: "*/${branch}"]],
-                        userRemoteConfigs: [[url: repoUrl]]
+                        branches :[[name: "*/${branch}"]],
+                        userRemoteConfigs: [[url: repoURL]]
                     ])
                 }
             }
@@ -54,12 +54,12 @@ def call(Map config = [:]) {
 
         post{
             success{
-                slackSend( channel: slackChannel, color: '#00FF00'
+                slackSend( channel: slackChannel, color: '#00FF00',
                     message: "SUCCESS: ${actionMessage} complete successfully. Build #${env.BUILD_NUMBER} (${env.BUILD_URL})"
                 )
             }
             failure {
-                slackSend(channel: slackChannel, color: "#ff0000"
+                slackSend(channel: slackChannel, color: "#ff0000",
                     message: "FAILURE: ${actionmessage} failed during execution. Check logs: ${env.BUILD_URL}"
                 )
             }
