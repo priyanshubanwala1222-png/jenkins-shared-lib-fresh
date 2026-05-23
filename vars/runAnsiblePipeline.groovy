@@ -7,7 +7,7 @@ def call(Map config = [:]) {
     def branch = config.get('BRANCH', 'main')
     def basePath = config.get('CODE_BASE_PATH', "env/${environment}")
     def actionMessage = config.get('ACTION_MESSAGE', "Deploying Nginx to ${environment}")
-    def skipApproval = congig.get('KEEP_APPROVAL_STAGE', true).toString().toBoolean() == false
+    def skipApproval  = config.get('KEEP_APPROVAL_STAGE', true).toString().toBoolean() == false
     
     pipeline {
         agent {label 'assign-6'}
