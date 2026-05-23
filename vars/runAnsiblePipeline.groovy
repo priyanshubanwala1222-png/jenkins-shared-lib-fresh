@@ -5,7 +5,6 @@ def call(Map config = [:]) {
     def environment = config.get('ENVIRONMENT', 'prod')
     def repoURL = config.get('REPO_URL', 'https://github.com/priyanshubanwala1222-png/Batch.34.2026.git')
     def branch = config.get('BRANCH', 'main')
-    def basePath = config.get('CODE_BASE_PATH', "env/${environment}")
     def actionMessage = config.get('ACTION_MESSAGE', "Deploying Nginx to ${environment}")
     def skipApproval  = config.get('KEEP_APPROVAL_STAGE', true).toString().toBoolean() == false
     
@@ -37,12 +36,9 @@ def call(Map config = [:]) {
             }
 
             stage('Playbook Execution') {
-                steps{
-                    echo "Executing Ansible Playbook from path: ${basePath}"
-                    dir(basePath) {
-                        sh "ls -la"
-                        sh "ansible-playbook -i ../../inventories/hosts ../../site.yml"
-                    }
+                steps {
+                    echo "Executing Ansible Playbook"
+                    sh "ansible-playbook -i inventories/hosts site.yml"
                 }
             }
         }
