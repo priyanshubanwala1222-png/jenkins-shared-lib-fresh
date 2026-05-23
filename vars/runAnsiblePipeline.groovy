@@ -12,11 +12,6 @@ def call(Map config = [:]) {
     pipeline {
         agent {label 'assign-6'}
 
-        options {
-            ansiColor('xterm') 
-            timeout(time: 1, unit: 'HOURS')
-        }
-
         stages{
             stage('Clone Repository'){
                 steps{
