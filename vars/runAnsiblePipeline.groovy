@@ -40,6 +40,7 @@ def call(Map config = [:]) {
                 steps{
                     echo "Executing Ansible Playbook from path: ${basePath}"
                     dir(basePath) {
+                        sh "ls -la"
                         sh "ansible-playbook -i inventories/hosts site.yml"
                     }
                 }
