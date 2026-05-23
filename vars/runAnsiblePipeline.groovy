@@ -15,7 +15,7 @@ def call(Map config = [:]) {
         stages{
             stage('Clone Repository'){
                 steps{
-                    echo "Cloning Ansible configuration from ${repoUrl} [${branch}]..."
+                    echo "Cloning Ansible configuration from ${repoURL} [${branch}]..."
                     cleanWs()
                     checkout([$class: 'GitSCM',
                         branches :[[name: "*/${branch}"]],
@@ -55,7 +55,7 @@ def call(Map config = [:]) {
             }
             failure {
                 slackSend(channel: slackChannel, color: "#ff0000",
-                    message: "FAILURE: ${actionmessage} failed during execution. Check logs: ${env.BUILD_URL}"
+                    message: "FAILURE: ${actionMessage} failed during execution. Check logs: ${env.BUILD_URL}"
                 )
             }
         }
